@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS Emulator", "OS Emulator.csproj", "{43C1F256-E581-4890-AE06-9F4BB0DF5DFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43C1F256-E581-4890-AE06-9F4BB0DF5DFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C1F256-E581-4890-AE06-9F4BB0DF5DFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C1F256-E581-4890-AE06-9F4BB0DF5DFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C1F256-E581-4890-AE06-9F4BB0DF5DFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2544238B-BCBD-43DB-BD77-FDBBA2B35FFA}
+	EndGlobalSection
+EndGlobal
