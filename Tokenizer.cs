@@ -5,7 +5,7 @@ using System.Text;
 
 public class Tokenizer
 {
-	public List<string>Parse(string lineToParse, int startParseIndex=0){
+	public List<string>?Parse(string lineToParse, int startParseIndex=0){
 		StringBuilder currentToken=new();
 		List<string>tokens=[];
 		bool inDoubleQuotMark=false;
@@ -29,7 +29,7 @@ public class Tokenizer
 				if(!inSingleQuotMark)lastOpenedQuotation=StructuralTypes.SingleQuotMark;
 				inSingleQuotMark=!inSingleQuotMark;
 				continue;}
-			if(char.IsWhiteSpace(symbol)){
+			if(char.IsWhiteSpace(symbol)&&!inSingleQuotMark&&!inDoubleQuotMark){
 				if(currentToken.Length>0){
 					tokens.Add(currentToken.ToString());
 					currentToken.Clear();}
