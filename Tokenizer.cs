@@ -37,7 +37,7 @@ public class Tokenizer
 			currentToken.Append(symbol);}
 		if(currentToken.Length>0)tokens.Add(currentToken.ToString());
 		if(inDoubleQuotMark||inSingleQuotMark||incorrectCloseQuotMark){
-			Console.WriteLine("Incorrect quotation marks placement");
+			EventBus.OperationReport?.Invoke(OperationCodes.IncorrectQuotMarksPlacement);
 			return default;}
 		return tokens;}
 }

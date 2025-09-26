@@ -1,0 +1,6 @@
+﻿cd
+cd "some argument"
+ls
+???
+ls
+exit
