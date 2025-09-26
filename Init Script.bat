@@ -1,1 +1,0 @@
-dotnet run -- someVFSPath Username StartScript.txt
