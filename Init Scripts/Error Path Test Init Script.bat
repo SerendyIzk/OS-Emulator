@@ -1,4 +1,4 @@
 @echo off
 cd ..
-dotnet run -- VFSPATH SomeUser uwwawa
+dotnet run -- uwauwua SomeUser uwwawa
 @echo on

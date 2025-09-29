@@ -4,6 +4,7 @@
 	UnknownCommand,
 	IncorrectQuotMarksPlacement,
 	Exit,
-	NonExistentPath,
+	NonExistentScriptPath,
+	VFSFileError,
 	OtherFailure
 }

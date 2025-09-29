@@ -2,5 +2,6 @@
 cd "some argument"
 ls
 ???
+cd arg1 arg2
 ls
 exit

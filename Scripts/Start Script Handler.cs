@@ -10,7 +10,7 @@ public class StartScriptHandler
 
 	public void ProcessStartScript(string path,string vfsName){
 		if(!File.Exists(path)){
-			EventBus.OperationReport?.Invoke(OperationCodes.NonExistentPath);
+			EventBus.OperationReport?.Invoke(OperationCodes.NonExistentScriptPath);
 			return;}
 		EventBus.OperationReport+=ExitCheck;
 		Tokenizer tokenizer=new();
@@ -26,7 +26,7 @@ public class StartScriptHandler
 			case OperationCodes.Exit:
 			case OperationCodes.UnknownCommand:
 			case OperationCodes.IncorrectQuotMarksPlacement:
-			case OperationCodes.NonExistentPath:
+			case OperationCodes.NonExistentScriptPath:
 			case OperationCodes.OtherFailure:
 				_exit=true;
 				break;}}

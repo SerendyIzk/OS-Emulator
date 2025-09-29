@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VFS name="root">
+	<file name="Greeting">Hello World!</file>
+	<dir name="Some directory">
+		<file name="Farewell">Goodbye!</file>
+	</dir>
+</VFS>

@@ -1,4 +1,4 @@
 @echo off
 cd ..
-dotnet run -- someVFSPath Username "Start Scripts\StartScript.txt"
+dotnet run -- "VFSs\Extended VFS.xml" Username "Start Scripts\StartScript.txt"
 @echo on

@@ -14,11 +14,13 @@ public static class Emulator
 		CommandHandler handler=new();
 		StartScriptHandler startScript=new();
 		Executor executor=new();
-		string vfsPath=args.Length>0?args[0]:"No transmitted file path";
+		VFSHandler vfs=new();
+		string vfsPath=args.Length>0?args[0]:"No transmitted VFS-File path";
 		string vfsName=args.Length>1?args[1]:"VFS";
 		string scriptPath=args.Length>2?args[2]:"No transmitted script path";
 		Console.WriteLine($"OS Emulator started");
 		Console.WriteLine($"VFS path: {vfsPath}, VFS name: {vfsName}, Starting script path: {scriptPath}");
+		if(args.Length>0)vfs.ProcessXML(vfsPath);
 		if(args.Length>2){
 			startScript.ProcessStartScript(scriptPath,vfsName);
 			_exit=false;}
@@ -42,8 +44,11 @@ public static class Emulator
 			case OperationCodes.Exit:
 				Console.WriteLine("OS Emulator stopped");
 				break;
-			case OperationCodes.NonExistentPath:
-				Console.WriteLine("Non-existent path error");
+			case OperationCodes.NonExistentScriptPath:
+				Console.WriteLine("Non-existent start script path error");
+				break;
+			case OperationCodes.VFSFileError:
+				Console.WriteLine("VFS File Error");
 				break;
 			case OperationCodes.OtherFailure:
 				Console.WriteLine("Error in command");

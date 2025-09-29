@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VFS name="root">
+	<file name="Company name">Google</file>
+	<dir name="Company staff members">
+		<dir name="Company management">
+			<file name="Management names">Bob, Alex, Steve</file>
+		</dir>
+		<dir name="Full-time employees">
+			<file name="Employees names">James, Mark, Alice</file>
+		</dir>
+		<file name="Salary information">1000$, 567$, 2395$, -10$, 0$, 99.99$</file>
+	</dir>
+	<file name="About company">Some information</file>
+</VFS>
