@@ -1,7 +1,17 @@
-﻿cd
-cd "some argument"
+﻿ls root
+cd "company staff members"
 ls
-???
-cd arg1 arg2
+cd
 ls
+ls "company staff members/full-time employees"
+cd "root/company staff members/full-time employees"
+ls
+ls "root/company staff members/full-time employees/employees names"
+du
+du root
+who
+pwd
+cd root
+pwd
+du "about company"
 exit

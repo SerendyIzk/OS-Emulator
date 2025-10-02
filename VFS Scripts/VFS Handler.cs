@@ -11,6 +11,7 @@ public class VFSHandler
 	private XDocument? _vfsXML;
 	private XElement? _vfsRootInXML;
 	private VFSRoot _vfsRootObj=new();
+	public VFSRoot VFSRootObj{get=>_vfsRootObj;private set=>_vfsRootObj=value;}
 
 	public void ProcessXML(string path){
 		if(!ValidateXML(path))return;

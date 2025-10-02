@@ -11,21 +11,22 @@ public static class Emulator
 		EventBus.OperationReport+=OperationReport;
 		EventBus.OperationReport+=ExitCheck;
 		Tokenizer tokenizer=new();
-		CommandHandler handler=new();
+		CommandHandler cmdHandler=new();
 		StartScriptHandler startScript=new();
-		Executor executor=new();
-		VFSHandler vfs=new();
+		Executor executor;
+		VFSHandler vfsHandler=new();
 		string vfsPath=args.Length>0?args[0]:"No transmitted VFS-File path";
 		string vfsName=args.Length>1?args[1]:"VFS";
 		string scriptPath=args.Length>2?args[2]:"No transmitted script path";
 		Console.WriteLine($"OS Emulator started");
 		Console.WriteLine($"VFS path: {vfsPath}, VFS name: {vfsName}, Starting script path: {scriptPath}");
-		if(args.Length>0)vfs.ProcessXML(vfsPath);
+		if(args.Length>0)vfsHandler.ProcessXML(vfsPath);
 		if(args.Length>2){
-			startScript.ProcessStartScript(scriptPath,vfsName);
+			startScript.ProcessStartScript(scriptPath,vfsName,vfsHandler);
 			_exit=false;}
+		executor=new(vfsHandler.VFSRootObj);
 		while(true){
-			executor.Execute(vfsName,tokenizer,handler);
+			executor.Execute(vfsName,tokenizer,cmdHandler,vfsHandler);
 			if(_exit)break;}
 		EventBus.OperationReport-=ExitCheck;
 		EventBus.OperationReport-=OperationReport;}

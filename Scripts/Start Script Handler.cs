@@ -8,16 +8,16 @@ public class StartScriptHandler
 {
 	private bool _exit=false;
 
-	public void ProcessStartScript(string path,string vfsName){
+	public void ProcessStartScript(string path,string vfsName,VFSHandler vfsHandler){
 		if(!File.Exists(path)){
 			EventBus.OperationReport?.Invoke(OperationCodes.NonExistentScriptPath);
 			return;}
 		EventBus.OperationReport+=ExitCheck;
 		Tokenizer tokenizer=new();
 		CommandHandler handler=new();
-		Executor executor=new();
+		Executor executor=new(vfsHandler.VFSRootObj);
 		foreach(string line in File.ReadAllLines(path)){
-			executor.Execute(vfsName,line,tokenizer,handler);
+			executor.Execute(vfsName,line,tokenizer,handler,vfsHandler);
 			if(_exit)break;}
 		EventBus.OperationReport-=ExitCheck;}
 
@@ -28,6 +28,7 @@ public class StartScriptHandler
 			case OperationCodes.IncorrectQuotMarksPlacement:
 			case OperationCodes.NonExistentScriptPath:
 			case OperationCodes.OtherFailure:
+			case OperationCodes.VFSFileError:
 				_exit=true;
 				break;}}
 }

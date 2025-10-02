@@ -5,7 +5,7 @@ using System.Text;
 
 public class Tokenizer
 {
-	public List<string>?Parse(string lineToParse, int startParseIndex=0){
+	public List<string>?ParseCommand(string lineToParse, int startParseIndex=0){
 		StringBuilder currentToken=new();
 		List<string>tokens=[];
 		bool inDoubleQuotMark=false;
@@ -39,6 +39,19 @@ public class Tokenizer
 		if(inDoubleQuotMark||inSingleQuotMark||incorrectCloseQuotMark){
 			EventBus.OperationReport?.Invoke(OperationCodes.IncorrectQuotMarksPlacement);
 			return default;}
+		return tokens;}
+
+	public List<string>ParsePath(string path){
+		StringBuilder currentToken=new();
+		List<string>tokens=[];
+		for(int i=0;i<path.Length;i++){
+			char symbol=path[i];
+			if(symbol=='/'){
+				tokens.Add(currentToken.ToString());
+				currentToken.Clear();
+				continue;}
+			currentToken.Append(symbol);}
+		tokens.Add(currentToken.ToString());
 		return tokens;}
 }
 
