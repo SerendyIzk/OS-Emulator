@@ -11,8 +11,10 @@ public class Executor
 	public Executor(VFSNode?currentObj){_currentObj=currentObj;}
 
 	public void Execute(string vfsName,Tokenizer tokenizer,CommandHandler cmdHandler,VFSHandler vfsHandler){
+		Console.WriteLine();
 		Console.Write($"{vfsName}>");
 		string?inputLine=Console.ReadLine();
+		Console.WriteLine();
 		if(string.IsNullOrWhiteSpace(inputLine))return;
 		List<string>?tokens=tokenizer.ParseCommand(inputLine);
 		if(tokens==null||tokens.Count==0)return;
@@ -21,7 +23,9 @@ public class Executor
 		cmdHandler.ProcessCommand(vfsName,vfsHandler,command,commandArgs,vfsHandler.VFSRootObj,ref _currentObj);}
 
 	public void Execute(string vfsName,string?inputLine,Tokenizer tokenizer,CommandHandler cmdHandler,VFSHandler vfsHandler){
+		Console.WriteLine();
 		Console.WriteLine($"{vfsName}>{inputLine}");
+		Console.WriteLine();
 		if(string.IsNullOrWhiteSpace(inputLine))return;
 		List<string>?tokens=tokenizer.ParseCommand(inputLine);
 		if(tokens==null||tokens.Count==0)return;
