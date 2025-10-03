@@ -9,9 +9,9 @@ public abstract class VFSNode
 {
 	public string Name{get;protected set;}
 	public string AbsPath{get;protected set;}
-	public VFSNode?HeadObj{get;protected set;}
+	public VFSDirectory?HeadObj{get;protected set;}
 
-	public VFSNode(string name,string absPath,VFSNode?headObj){
+	public VFSNode(string name,string absPath,VFSDirectory?headObj){
 		Name=name;
 		AbsPath=absPath;
 		HeadObj=headObj;}

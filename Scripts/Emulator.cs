@@ -5,29 +5,30 @@ using System.Text;
 
 public static class Emulator
 {
+	private static Executor _executor=new(null);
+	private static VFSHandler _vfsHandler=new();
 	private static bool _exit=false;
 
 	public static void Main(string[]args){
 		EventBus.OperationReport+=OperationReport;
 		EventBus.OperationReport+=ExitCheck;
+		EventBus.VFSChanged+=OnVFSChanged;
 		Tokenizer tokenizer=new();
 		CommandHandler cmdHandler=new();
 		StartScriptHandler startScript=new();
-		Executor executor;
-		VFSHandler vfsHandler=new();
 		string vfsPath=args.Length>0?args[0]:"No transmitted VFS-File path";
 		string vfsName=args.Length>1?args[1]:"VFS";
 		string scriptPath=args.Length>2?args[2]:"No transmitted script path";
 		Console.WriteLine($"OS Emulator started");
 		Console.WriteLine($"VFS path: {vfsPath}, VFS name: {vfsName}, Starting script path: {scriptPath}");
-		if(args.Length>0)vfsHandler.ProcessXML(vfsPath);
+		if(args.Length>0)_vfsHandler.ProcessXML(vfsPath);
 		if(args.Length>2){
-			startScript.ProcessStartScript(scriptPath,vfsName,vfsHandler);
+			startScript.ProcessStartScript(scriptPath,vfsName,_vfsHandler);
 			_exit=false;}
-		executor=new(vfsHandler.VFSRootObj);
 		while(true){
-			executor.Execute(vfsName,tokenizer,cmdHandler,vfsHandler);
+			_executor.Execute(vfsName,tokenizer,cmdHandler,_vfsHandler);
 			if(_exit)break;}
+		EventBus.VFSChanged-=OnVFSChanged;
 		EventBus.OperationReport-=ExitCheck;
 		EventBus.OperationReport-=OperationReport;}
 
@@ -56,4 +57,6 @@ public static class Emulator
 				break;}}
 
 	private static void ExitCheck(OperationCodes code){if(code==OperationCodes.Exit)_exit=true;}
+
+	private static void OnVFSChanged(){_executor=new(_vfsHandler.VFSRootObj);}
 }

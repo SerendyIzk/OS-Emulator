@@ -10,7 +10,7 @@ public class VFSDirectory : VFSNode
 	private List<VFSNode>_children=[];
 	public List<VFSNode>Children{get=>_children;private set=>_children=value;}
 
-	public VFSDirectory(string name,string absPath,VFSNode headObj) : base(name,absPath,headObj){}
+	public VFSDirectory(string name,string absPath,VFSDirectory headObj) : base(name,absPath,headObj){}
 
 	public void BuildTree(XElement thisElemInXML){
 		Children?.Clear();

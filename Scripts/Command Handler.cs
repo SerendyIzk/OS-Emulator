@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class CommandHandler
 {
-	public void ProcessCommand(string vfsName,string command,List<string>args,VFSRoot?rootObj,ref VFSNode?currentObj){
+	public void ProcessCommand(string vfsName,VFSHandler vfsHandler,string command,List<string>args,VFSRoot?rootObj,ref VFSNode?currentObj){
 		Tokenizer tokenizer=new();
 		switch(command){
 			case"exit":
@@ -62,6 +62,25 @@ public class CommandHandler
 					Console.WriteLine($"<{node.Name}>\t\t\t<DISK USAGE: {CountVFSElemSize(node)}>");}
 				//EventBus.OperationReport?.Invoke(OperationCodes.Success);
 				break;
+			case"rmdir":
+				if(!ObjectVerify(in rootObj,in currentObj))break;
+				if(args.Count>=2){
+					EventBus.OperationReport?.Invoke(OperationCodes.OtherFailure);
+					break;}
+				VFSNode?deletableObject=FindInspectedObject(in rootObj,in currentObj,in args,in tokenizer);
+				if(!ObjectVerify(in deletableObject))break;
+				if(deletableObject.HeadObj==null){
+					EventBus.OperationReport?.Invoke(OperationCodes.OtherFailure);
+					break;}
+				currentObj=deletableObject.HeadObj;
+				deletableObject.HeadObj.Children.Remove(deletableObject);
+				break;
+			case"vfs-load":
+				if(args.Count!=1){
+					EventBus.OperationReport?.Invoke(OperationCodes.OtherFailure);
+					break;}
+				vfsHandler.ProcessXML(args[0]);
+				break;
 			default:
 				EventBus.OperationReport?.Invoke(OperationCodes.UnknownCommand);
 				break;}}
@@ -80,7 +99,7 @@ public class CommandHandler
 
 	private VFSNode?FindInspectedObject(ref readonly VFSRoot rootObj,ref readonly VFSNode currentObj,ref readonly List<string>args,ref readonly Tokenizer tokenizer)
 		=>args.Count==0?currentObj:tokenizer.ParsePath(args[0])[0]==rootObj.Name?
-			rootObj.SearchFromRoot(args[0].ToLower()):currentObj is VFSDirectory dir_2?dir_2.SearchFromCurrent(args[0].ToLower()):null;
+			rootObj.SearchFromRoot(args[0].ToLower()):currentObj is VFSDirectory dir?dir.SearchFromCurrent(args[0].ToLower()):null;
 
 	private int CountVFSElemSize(VFSNode obj){
 		if(obj is VFSFile file)return file.Content.Length;

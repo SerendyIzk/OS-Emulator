@@ -8,5 +8,5 @@ public class VFSFile : VFSNode
 {
 	public string Content{get;private set;}
 
-	public VFSFile(string name,string absPath,VFSNode headObj,string content) : base(name,absPath,headObj){Content=content;}
+	public VFSFile(string name,string absPath,VFSDirectory headObj,string content) : base(name,absPath,headObj){Content=content;}
 }

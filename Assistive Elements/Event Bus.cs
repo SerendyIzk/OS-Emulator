@@ -7,4 +7,5 @@ using System.Threading.Tasks;
 public static class EventBus
 {
 	public static Action<OperationCodes>?OperationReport;
+	public static Action VFSChanged;
 }

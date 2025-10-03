@@ -14,4 +14,12 @@ pwd
 cd root
 pwd
 du "about company"
+du root
+rmdir "company staff members/full-time employees"
+cd root
+du
+vfs-load "VFSs\Standard VFS.xml"
+ls
+vfs-load "VFSs\Extended VFS.xml"
+du
 exit

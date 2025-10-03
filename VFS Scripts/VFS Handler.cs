@@ -15,7 +15,8 @@ public class VFSHandler
 
 	public void ProcessXML(string path){
 		if(!ValidateXML(path))return;
-		_vfsRootObj.BuildTree(_vfsRootInXML);}
+		_vfsRootObj.BuildTree(_vfsRootInXML);
+		EventBus.VFSChanged?.Invoke();}
 
 	private bool ValidateXML(string path){
 		if(!File.Exists(path)){
